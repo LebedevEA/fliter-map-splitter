@@ -1,6 +1,6 @@
 public class ParsePair<T> {
-    public final T parsed;
-    public final StringLeftover leftover;
+    private final T parsed;
+    private final StringLeftover leftover;
 
     public ParsePair(T parsed, StringLeftover leftover) {
         this.parsed = parsed;
