@@ -28,6 +28,9 @@ public class BinaryExpression {
             var pairOP = Operation.parse(pairE1.leftover());
 
             if (!Expression.canParse(pairOP.leftover())) return false;
+            var pairE2 = Expression.parse(pairOP.leftover());
+
+            if (!Symbol.canParse(pairE2.leftover(), ')')) return false;
         } catch (ParseException pe) {
             var re = new RuntimeException("Parsing after toParse threw ParseException");
             re.addSuppressed(pe);
@@ -53,7 +56,11 @@ public class BinaryExpression {
             throw new ParseException("Could not parse binary expression", pairOP.leftover().offset());
         var pairE2 = Expression.parse(pairOP.leftover());
 
-        var binExpr = new BinaryExpression(pairE2.parsed(), pairOP.parsed(), pairE2.parsed());
-        return new ParsePair<>(binExpr, pairE2.leftover());
+        if (!Symbol.canParse(pairE2.leftover(), ')'))
+            throw new ParseException("Could not parse binary expression", pairE2.leftover().offset());
+        var pairC = Symbol.parse(pairE2.leftover());
+
+        var binExpr = new BinaryExpression(pairE1.parsed(), pairOP.parsed(), pairE2.parsed());
+        return new ParsePair<>(binExpr, pairC.leftover());
     }
 }

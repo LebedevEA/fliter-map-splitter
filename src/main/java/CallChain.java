@@ -28,8 +28,13 @@ public class CallChain {
         if (!canParse(toParse))
             throw new ParseException("Could not parse call-chain", toParse.offset());
         var pairH = Call.parse(toParse);
-        if (canParse(pairH.leftover())) {
-            var pairT = CallChain.parse(pairH.leftover());
+
+        if (!Literal.canParse(pairH.leftover(), "%>%"))
+            return new ParsePair<>(new CallChain(pairH.parsed()), pairH.leftover());
+        var pairS = Literal.parse(pairH.leftover(), "%>%");
+
+        if (canParse(pairS.leftover())) {
+            var pairT = CallChain.parse(pairS.leftover());
             return new ParsePair<>(new CallChain(pairH.parsed(), pairT.parsed()), pairT.leftover());
         } else {
             return new ParsePair<>(new CallChain(pairH.parsed()), pairH.leftover());
