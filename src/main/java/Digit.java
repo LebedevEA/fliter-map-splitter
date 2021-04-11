@@ -1,16 +1,12 @@
 import java.text.ParseException;
 
 public class Digit {
-    private final int digit;
+    public final int digit;
 
     public Digit(int digit) {
         if (digit < 0 || digit > 9)
             throw new RuntimeException("Digit is not a digit.");
         this.digit = digit;
-    }
-
-    public int digit() {
-        return digit;
     }
 
     @Override
@@ -27,6 +23,6 @@ public class Digit {
             throw new ParseException("Could not parse digit", toParse.offset());
 
         var pair = Symbol.parse(toParse);
-        return new ParsePair<>(new Digit(Character.getNumericValue(pair.parsed().symbol())), pair.leftover());
+        return new ParsePair<>(new Digit(Character.getNumericValue(pair.parsed().symbol)), pair.leftover());
     }
 }

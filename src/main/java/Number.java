@@ -1,14 +1,10 @@
 import java.text.ParseException;
 
 public class Number {
-    private final int number;
+    public final int number;
 
     public Number(int number) {
         this.number = number;
-    }
-
-    public int number() {
-        return number;
     }
 
     @Override
@@ -29,10 +25,10 @@ public class Number {
         if (canParse(pair1.leftover())) {
             var pair2 = Number.parse(pair1.leftover());
             int sizeOf2 = String.valueOf(pair2.parsed()).length();
-            int merged = pair2.parsed().number() + pair1.parsed().digit() * powerOfTen(sizeOf2);
+            int merged = pair2.parsed().number + pair1.parsed().digit * powerOfTen(sizeOf2);
             return new ParsePair<>(new Number(merged), pair2.leftover());
         } else {
-            return new ParsePair<>(new Number(pair1.parsed().digit()), pair1.leftover());
+            return new ParsePair<>(new Number(pair1.parsed().digit), pair1.leftover());
         }
     }
 

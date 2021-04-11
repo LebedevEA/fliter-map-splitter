@@ -2,14 +2,10 @@ import java.text.ParseException;
 import java.util.function.Predicate;
 
 public class Symbol {
-    private final char symbol;
+    public final char symbol;
 
     public Symbol(char symbol) {
         this.symbol = symbol;
-    }
-
-    public char symbol() {
-        return symbol;
     }
 
     @Override
