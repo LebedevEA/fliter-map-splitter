@@ -1,3 +1,3 @@
 # Filter and map splitter
 
-* Тестировал и писал на на jdk 15
+* Тестировал и писал на на openjdk-15
