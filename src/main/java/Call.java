@@ -22,6 +22,12 @@ public class Call {
         throw new RuntimeException("Call is not correct: none of two members presented");
     }
 
+    public boolean validate() {
+        if (mapCall != null) return mapCall.validate();
+        if (filterCall != null) return filterCall.validate();
+        throw new RuntimeException("Call is not correct: none of two members presented");
+    }
+
     public static boolean canParse(StringLeftover toParse) {
         return MapCall.canParse(toParse) || FilterCall.canParse(toParse);
     }

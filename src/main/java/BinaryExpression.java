@@ -16,6 +16,11 @@ public class BinaryExpression {
         return "(" + left + operation + right + ")";
     }
 
+    public boolean typeCheck(Type type) {
+        return operation.returnType().equals(type) &&
+                left.typeCheck(operation.argumentType()) && left.typeCheck(operation.argumentType());
+    }
+
     public static boolean canParse(StringLeftover toParse) {
         try {
             if (!Symbol.canParse(toParse, '(')) return false;

@@ -12,6 +12,10 @@ public class MapCall {
         return "map{" + expression + "}";
     }
 
+    public boolean validate() {
+        return expression.typeCheck(Type.INTEGER);
+    }
+
     public static boolean canParse(StringLeftover toParse) {
         return Util.canParseXCall(toParse, "map");
     }

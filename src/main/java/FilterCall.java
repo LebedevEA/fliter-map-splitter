@@ -12,6 +12,10 @@ public class FilterCall {
         return "filter{" + expression + "}";
     }
 
+    public boolean validate() {
+        return expression.typeCheck(Type.BOOLEAN);
+    }
+
     public static boolean canParse(StringLeftover toParse) {
         return Util.canParseXCall(toParse, "filter");
     }

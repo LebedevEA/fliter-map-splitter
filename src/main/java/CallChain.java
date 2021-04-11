@@ -20,6 +20,14 @@ public class CallChain {
         else return head + "%>%" + tail;
     }
 
+    public boolean validate() {
+        if (tail == null) {
+            return head.validate();
+        } else {
+            return head.validate() && tail.validate();
+        }
+    }
+
     public static boolean canParse(StringLeftover toParse) {
         return Call.canParse(toParse);
     }

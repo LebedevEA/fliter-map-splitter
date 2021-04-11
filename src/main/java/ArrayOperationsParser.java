@@ -20,7 +20,7 @@ public class ArrayOperationsParser {
         return callChain == null ? null : callChain.parsed();
     }
 
-    public static CallChain parse(String operation) throws ParseException {
+    public static CallChain parse(String operation) {
         try {
             var aop = new ArrayOperationsParser(operation);
             return aop.parse();
