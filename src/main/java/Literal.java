@@ -1,9 +1,12 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class Literal {
+    @NotNull
     public final String literal;
 
-    public Literal(String literal) {
+    public Literal(@NotNull String literal) {
         this.literal = literal;
     }
 
@@ -12,7 +15,7 @@ public class Literal {
         return literal;
     }
 
-    public static boolean canParse(StringLeftover toParse, String goal) {
+    public static boolean canParse(@NotNull StringLeftover toParse, @NotNull String goal) {
         int i = 0;
         while (i < goal.length() && i < toParse.left() && toParse.charAt(i) == goal.charAt(i)) {
             i++;
@@ -20,10 +23,11 @@ public class Literal {
         return i == goal.length();
     }
 
-    public static ParsePair<Literal> parse(StringLeftover toParse, String goal) throws ParseException {
-        if (!canParse(toParse, goal))
-            throw new ParseException("Could not parse literal equals to " + goal, toParse.offset());
+    @NotNull
+    public static ParsePair<Literal> parse(@NotNull StringLeftover toParse, @NotNull String res) throws ParseException {
+        if (!canParse(toParse, res))
+            throw new ParseException("Could not parse literal equals to " + res, toParse.offset());
 
-        return new ParsePair<>(new Literal(goal), toParse.skip(goal.length()));
+        return new ParsePair<>(new Literal(res), toParse.skip(res.length()));
     }
 }

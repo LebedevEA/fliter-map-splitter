@@ -1,15 +1,17 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class Call {
     public final MapCall mapCall;
     public final FilterCall filterCall;
 
-    public Call(MapCall mapCall) {
+    public Call(@NotNull MapCall mapCall) {
         this.mapCall = mapCall;
         this.filterCall = null;
     }
 
-    public Call(FilterCall filterCall) {
+    public Call(@NotNull FilterCall filterCall) {
         this.mapCall = null;
         this.filterCall = filterCall;
     }
@@ -27,11 +29,12 @@ public class Call {
         throw new RuntimeException("Call is not correct: none of two members presented");
     }
 
-    public static boolean canParse(StringLeftover toParse) {
+    public static boolean canParse(@NotNull StringLeftover toParse) {
         return MapCall.canParse(toParse) || FilterCall.canParse(toParse);
     }
 
-    public static ParsePair<Call> parse(StringLeftover toParse) throws ParseException {
+    @NotNull
+    public static ParsePair<Call> parse(@NotNull StringLeftover toParse) throws ParseException {
         if (MapCall.canParse(toParse)) {
             var pair = MapCall.parse(toParse);
             return new ParsePair<>(new Call(pair.parsed()), pair.leftover());

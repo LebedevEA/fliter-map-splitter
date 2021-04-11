@@ -1,11 +1,14 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class ArrayOperationsParser {
+    @NotNull
     private final StringLeftover toParse;
     private ParsePair<CallChain> callChain = null;
     private boolean parsed = false;
 
-    public ArrayOperationsParser(String operation) {
+    public ArrayOperationsParser(@NotNull String operation) {
         toParse = new StringLeftover(operation);
     }
 
@@ -18,7 +21,7 @@ public class ArrayOperationsParser {
         return callChain == null ? null : callChain.parsed();
     }
 
-    public static CallChain parse(String operation) {
+    public static CallChain parse(@NotNull String operation) {
         try {
             var aop = new ArrayOperationsParser(operation);
             return aop.parse();

@@ -1,9 +1,12 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class MapCall {
+    @NotNull
     public final Expression expression;
 
-    public MapCall(Expression expression) {
+    public MapCall(@NotNull Expression expression) {
         this.expression = expression;
     }
 
@@ -12,7 +15,8 @@ public class MapCall {
         return "map{" + expression + "}";
     }
 
-    public MapCall subst(Expression expression1) {
+    @NotNull
+    public MapCall subst(@NotNull Expression expression1) {
         return new MapCall(expression.subst(expression1));
     }
 
@@ -20,11 +24,12 @@ public class MapCall {
         return expression.typeCheck(Type.INTEGER);
     }
 
-    public static boolean canParse(StringLeftover toParse) {
+    public static boolean canParse(@NotNull StringLeftover toParse) {
         return Util.canParseXCall(toParse, "map");
     }
 
-    public static ParsePair<MapCall> parse(StringLeftover toParse) throws ParseException {
+    @NotNull
+    public static ParsePair<MapCall> parse(@NotNull StringLeftover toParse) throws ParseException {
         var pair = Util.parseXCall(toParse, "map");
         return new ParsePair<>(new MapCall(pair.parsed()), pair.leftover());
     }

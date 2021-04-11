@@ -1,23 +1,26 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class CallChain {
+    @NotNull
     public final Call head;
     public final CallChain tail;
 
-    public CallChain(Call head) {
+    public CallChain(@NotNull Call head) {
         this.head = head;
         this.tail = null;
     }
 
-    public CallChain(Call head, CallChain tail) {
+    public CallChain(@NotNull Call head, @NotNull CallChain tail) {
         this.head = head;
         this.tail = tail;
     }
 
-    public CallChain(Call... calls) {
+    public CallChain(@NotNull Call... calls) {
         if (calls.length == 0) throw new IllegalArgumentException("Cannot create empty CallChain");
         LinkedList<Call> ll = Arrays.stream(calls).collect(Collectors.toCollection(LinkedList::new));
         CallChain cc = Util.buildChain(ll);
@@ -40,11 +43,12 @@ public class CallChain {
         }
     }
 
-    public static boolean canParse(StringLeftover toParse) {
+    public static boolean canParse(@NotNull StringLeftover toParse) {
         return Call.canParse(toParse);
     }
 
-    public static ParsePair<CallChain> parse(StringLeftover toParse) throws ParseException {
+    @NotNull
+    public static ParsePair<CallChain> parse(@NotNull StringLeftover toParse) throws ParseException {
         if (!canParse(toParse))
             throw new ParseException("Could not parse call-chain", toParse.offset());
         var pairH = Call.parse(toParse);

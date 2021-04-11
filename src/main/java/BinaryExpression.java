@@ -1,11 +1,16 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class BinaryExpression {
+    @NotNull
     public final Expression left;
+    @NotNull
     public final Operation operation;
+    @NotNull
     public final Expression right;
 
-    public BinaryExpression(Expression left, Operation operation, Expression right) {
+    public BinaryExpression(@NotNull Expression left, @NotNull Operation operation, @NotNull Expression right) {
         this.left = left;
         this.operation = operation;
         this.right = right;
@@ -16,16 +21,17 @@ public class BinaryExpression {
         return "(" + left + operation + right + ")";
     }
 
-    public BinaryExpression subst(Expression expression) {
+    @NotNull
+    public BinaryExpression subst(@NotNull Expression expression) {
         return new BinaryExpression(left.subst(expression), operation, right.subst(expression));
     }
 
-    public boolean typeCheck(Type type) {
+    public boolean typeCheck(@NotNull Type type) {
         return operation.returnType().equals(type) &&
                 left.typeCheck(operation.argumentType()) && left.typeCheck(operation.argumentType());
     }
 
-    public static boolean canParse(StringLeftover toParse) {
+    public static boolean canParse(@NotNull StringLeftover toParse) {
         try {
             if (!Symbol.canParse(toParse, '(')) return false;
             var pairOB = Symbol.parse(toParse);
@@ -48,7 +54,8 @@ public class BinaryExpression {
         return true;
     }
 
-    public static ParsePair<BinaryExpression> parse(StringLeftover toParse) throws ParseException {
+    @NotNull
+    public static ParsePair<BinaryExpression> parse(@NotNull StringLeftover toParse) throws ParseException {
         if (!Symbol.canParse(toParse, '('))
             throw new ParseException("Could not parse binary expression", toParse.offset());
         var pairOB = Symbol.parse(toParse);

@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class Operation {
@@ -14,21 +16,24 @@ public class Operation {
         return String.valueOf(operation);
     }
 
+    @NotNull
     public Type returnType() {
         if (String.valueOf(operation).matches("[+\\-*]")) return Type.INTEGER;
         else return Type.BOOLEAN;
     }
 
+    @NotNull
     public Type argumentType() {
         if (String.valueOf(operation).matches("[+\\-*<=>]")) return Type.INTEGER;
         else return Type.BOOLEAN;
     }
 
-    public static boolean canParse(StringLeftover toParse) {
+    public static boolean canParse(@NotNull StringLeftover toParse) {
         return Symbol.canParse(toParse, "[+\\-*><=&|]");
     }
 
-    public static ParsePair<Operation> parse(StringLeftover toParse) throws ParseException {
+    @NotNull
+    public static ParsePair<Operation> parse(@NotNull StringLeftover toParse) throws ParseException {
         if (!Symbol.canParse(toParse, "[+\\-*><=&|]"))
             throw new ParseException("Could not parse operation", toParse.offset());
 

@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 public class Compressor {
@@ -6,7 +8,8 @@ public class Compressor {
     static Call defaultFilter = Objects.requireNonNull(ArrayOperationsParser.parse("filter{(0=0)}")).head;
     static Call defaultMap = Objects.requireNonNull(ArrayOperationsParser.parse("map{element}")).head;
 
-    public static CallChain compress(CallChain chain) {
+    @NotNull
+    public static CallChain compress(@NotNull CallChain chain) {
         Call curElement = defaultMap;
         Call curFilter = defaultFilter;
 

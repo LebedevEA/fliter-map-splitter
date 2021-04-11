@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class Number {
@@ -12,11 +14,12 @@ public class Number {
         return String.valueOf(number);
     }
 
-    public static boolean canParse(StringLeftover toParse) {
+    public static boolean canParse(@NotNull StringLeftover toParse) {
         return Symbol.canParse(toParse, Character::isDigit);
     }
 
-    public static ParsePair<Number> parse(StringLeftover toParse) throws ParseException {
+    @NotNull
+    public static ParsePair<Number> parse(@NotNull StringLeftover toParse) throws ParseException {
         if (!Symbol.canParse(toParse, Character::isDigit))
             throw new ParseException("Could not parse number", toParse.offset());
 

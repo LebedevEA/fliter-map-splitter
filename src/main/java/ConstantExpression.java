@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 
 public class ConstantExpression {
@@ -12,11 +14,12 @@ public class ConstantExpression {
         return String.valueOf(constant);
     }
 
-    public static boolean canParse(StringLeftover toParse) {
+    public static boolean canParse(@NotNull StringLeftover toParse) {
         return Number.canParse(toParse) || Symbol.canParse(toParse, "\\-") && Number.canParse(toParse.skip(1));
     }
 
-    public static ParsePair<ConstantExpression> parse(StringLeftover toParse) throws ParseException  {
+    @NotNull
+    public static ParsePair<ConstantExpression> parse(@NotNull StringLeftover toParse) throws ParseException  {
         if (Number.canParse(toParse)) {
             var pair = Number.parse(toParse);
             return new ParsePair<>(new ConstantExpression(pair.parsed().number), pair.leftover());
