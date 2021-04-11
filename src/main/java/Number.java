@@ -7,19 +7,22 @@ public class Number {
         this.number = number;
     }
 
-    private int number() {
+    public int number() {
         return number;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
+
     public static boolean canParse(StringLeftover toParse) {
-        return toParse.left() > 0 && Character.isDigit(toParse.charAt(0));
+        return Symbol.canParse(toParse, Character::isDigit);
     }
 
     public static ParsePair<Number> parse(StringLeftover toParse) throws ParseException {
-        if (toParse.left() <= 0)
-            throw new ParseException("Trying to parse number in empty string", toParse.offset());
-        if (Character.isDigit(toParse.charAt(0)))
-            throw new ParseException("Number has to start with digit", toParse.offset());
+        if (!Symbol.canParse(toParse, Character::isDigit))
+            throw new ParseException("Could not parse number", toParse.offset());
 
         var pair1 = Digit.parse(toParse);
 

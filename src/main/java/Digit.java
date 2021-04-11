@@ -13,16 +13,20 @@ public class Digit {
         return digit;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(digit);
+    }
+
     public static boolean canParse(StringLeftover toParse) {
         return toParse.left() > 0 && Character.isDigit(toParse.charAt(0));
     }
 
     public static ParsePair<Digit> parse(StringLeftover toParse) throws ParseException {
-        if (toParse.left() <= 0)
-            throw new ParseException("Trying to parse digit in empty string", toParse.offset());
-        if (Character.isDigit(toParse.charAt(0)))
-            throw new ParseException("Digit is not actually a digit", toParse.offset());
+        if (!Symbol.canParse(toParse, Character::isDigit))
+            throw new ParseException("Could not parse digit", toParse.offset());
 
-        return new ParsePair<>(new Digit(Character.getNumericValue(toParse.charAt(0))), toParse.skip(1));
+        var pair = Symbol.parse(toParse);
+        return new ParsePair<>(new Digit(Character.getNumericValue(pair.parsed().symbol())), pair.leftover());
     }
 }
