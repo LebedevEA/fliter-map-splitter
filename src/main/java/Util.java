@@ -1,13 +1,23 @@
 import java.text.ParseException;
+import java.util.LinkedList;
 
-// static object just to have some functions
-class Util {
+class Util { // static object just to have some functions
     private Util() {}
 
     // just a bit faster
     static final int[] POWERS_OF_10 = { 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000 };
     static int powerOfTen(int pow) {
         return POWERS_OF_10[pow];
+    }
+
+    static Operation AND = new Operation('&');
+
+    static CallChain buildChain(LinkedList<Call> ll) {
+        if (ll.isEmpty()) return null;
+        Call head = ll.remove();
+        CallChain tail = buildChain(ll);
+        if (tail == null) return new CallChain(head);
+        else return new CallChain(head, tail);
     }
 
     static boolean canParseXCall(StringLeftover toParse, String x) {

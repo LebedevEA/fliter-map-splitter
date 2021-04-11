@@ -1,0 +1,38 @@
+StringLeftover.java
+ StringLeftover
+Type.java
+ Type
+Expression.java
+ Expression
+ConstantExpression.java
+ ConstantExpression
+Digit.java
+ Digit
+ParsePair.java
+ ParsePair
+Number.java
+ Number
+Operation.java
+ Operation
+MapCall.java
+ MapCall
+Literal.java
+ Literal
+Call.java
+ Call
+Symbol.java
+ Symbol
+FilterCall.java
+ FilterCall
+BinaryExpression.java
+ BinaryExpression
+CallChain.java
+ CallChain
+ArrayOperationsParser.java
+ ArrayOperationsParser
+Util.java
+ Util
+Main.java
+ Main
+Comporessor.java
+ Comporessor

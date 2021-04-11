@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.ParseException;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,6 +15,7 @@ public class Main {
                 System.out.println("TYPE ERROR");
                 return;
             }
+            System.out.println(Compressor.compress(parsed));
         } catch (IOException e) {
             System.out.println("Something went wrong while reading from stdin, try again");
         } catch (Exception e) {

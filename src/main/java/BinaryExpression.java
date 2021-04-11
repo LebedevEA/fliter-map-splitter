@@ -16,6 +16,10 @@ public class BinaryExpression {
         return "(" + left + operation + right + ")";
     }
 
+    public BinaryExpression subst(Expression expression) {
+        return new BinaryExpression(left.subst(expression), operation, right.subst(expression));
+    }
+
     public boolean typeCheck(Type type) {
         return operation.returnType().equals(type) &&
                 left.typeCheck(operation.argumentType()) && left.typeCheck(operation.argumentType());

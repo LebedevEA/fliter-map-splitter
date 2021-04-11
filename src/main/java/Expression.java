@@ -34,6 +34,13 @@ public class Expression {
         throw new RuntimeException("Expression is not correct: none of three members presented");
     }
 
+    public Expression subst(Expression expression) {
+        if (element != null) return expression;
+        if (binExpr != null) return new Expression(binExpr.subst(expression));
+        if (constExpr != null) return this;
+        throw new RuntimeException("Expression is not correct: none of three members presented");
+    }
+
     public boolean typeCheck(Type type) {
         if (element != null) return type.equals(Type.INTEGER);
         if (binExpr != null) return binExpr.typeCheck(type);

@@ -12,6 +12,10 @@ public class MapCall {
         return "map{" + expression + "}";
     }
 
+    public MapCall subst(Expression expression1) {
+        return new MapCall(expression.subst(expression1));
+    }
+
     public boolean validate() {
         return expression.typeCheck(Type.INTEGER);
     }

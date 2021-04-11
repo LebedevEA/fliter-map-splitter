@@ -1,6 +1,4 @@
-import javax.swing.text.html.Option;
 import java.text.ParseException;
-import java.util.Optional;
 
 public class ArrayOperationsParser {
     private final StringLeftover toParse;

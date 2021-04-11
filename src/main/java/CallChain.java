@@ -1,4 +1,7 @@
 import java.text.ParseException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class CallChain {
     public final Call head;
@@ -12,6 +15,15 @@ public class CallChain {
     public CallChain(Call head, CallChain tail) {
         this.head = head;
         this.tail = tail;
+    }
+
+    public CallChain(Call... calls) {
+        if (calls.length == 0) throw new IllegalArgumentException("Cannot create empty CallChain");
+        LinkedList<Call> ll = Arrays.stream(calls).collect(Collectors.toCollection(LinkedList::new));
+        CallChain cc = Util.buildChain(ll);
+        if (cc == null) throw new RuntimeException("buildChain did not build chain but had to");
+        head = cc.head;
+        tail = cc.tail;
     }
 
     @Override
