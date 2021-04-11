@@ -1,6 +1,7 @@
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.Objects;
 
 public class Operation {
     public final char operation;
@@ -14,6 +15,19 @@ public class Operation {
     @Override
     public String toString() {
         return String.valueOf(operation);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Operation that = (Operation) o;
+        return operation == that.operation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation);
     }
 
     @NotNull

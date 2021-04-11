@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SplitterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-04-11T17:50:48" hostname="lebedev" time="0.018">
+  <properties/>
+  <testcase name="testCorrects()" classname="SplitterTest" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

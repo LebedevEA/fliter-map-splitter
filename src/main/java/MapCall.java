@@ -1,6 +1,7 @@
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.Objects;
 
 public class MapCall {
     @NotNull
@@ -13,6 +14,19 @@ public class MapCall {
     @Override
     public String toString() {
         return "map{" + expression + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MapCall that = (MapCall) o;
+        return expression.equals(that.expression);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expression);
     }
 
     @NotNull

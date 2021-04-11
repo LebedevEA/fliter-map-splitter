@@ -1,6 +1,7 @@
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.Objects;
 
 public class Literal {
     @NotNull
@@ -13,6 +14,19 @@ public class Literal {
     @Override
     public String toString() {
         return literal;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Literal that = (Literal) o;
+        return literal.equals(that.literal);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(literal);
     }
 
     public static boolean canParse(@NotNull StringLeftover toParse, @NotNull String goal) {

@@ -1,6 +1,7 @@
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Symbol {
@@ -13,6 +14,19 @@ public class Symbol {
     @Override
     public  String toString() {
         return String.valueOf(symbol);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Symbol that = (Symbol) o;
+        return symbol == that.symbol;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(symbol);
     }
 
     public static boolean canParse(@NotNull StringLeftover toParse) {

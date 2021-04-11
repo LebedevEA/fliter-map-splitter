@@ -1,6 +1,7 @@
 import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
+import java.util.Objects;
 
 public class Digit {
     public final int digit;
@@ -14,6 +15,19 @@ public class Digit {
     @Override
     public String toString() {
         return String.valueOf(digit);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Digit that = (Digit) o;
+        return digit == that.digit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(digit);
     }
 
     public static boolean canParse(@NotNull StringLeftover toParse) {

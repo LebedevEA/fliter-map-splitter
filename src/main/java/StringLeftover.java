@@ -1,5 +1,7 @@
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class StringLeftover {
     @NotNull
     private final String base;
@@ -13,6 +15,24 @@ public class StringLeftover {
     public StringLeftover(@NotNull StringLeftover s, int skip) {
         base = s.base;
         offset = s.offset + skip;
+    }
+
+    @Override
+    public String toString() {
+        return base.substring(offset);
+    }
+
+    @Override
+    public boolean equals(Object o) { // memorize
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StringLeftover that = (StringLeftover) o;
+        return base == that.base && offset == that.offset || toString().equals(that.toString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(toString());
     }
 
     @NotNull
