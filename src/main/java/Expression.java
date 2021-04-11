@@ -1,9 +1,56 @@
+import java.text.ParseException;
+
 public class Expression {
-    public static boolean canParse(StringLeftover toParse) {
-        return false;
+    public final Literal element;
+    public final BinaryExpression binExpr;
+    public final ConstantExpression constExpr;
+
+    public Expression(Literal element) {
+        if (!element.literal.equals("element"))
+            throw new RuntimeException("Expressions' literal is not an \"element\"");
+        this.element = element;
+        this.binExpr = null;
+        this.constExpr = null;
     }
 
-    public static ParsePair<Expression> parse(StringLeftover toParse) {
-        return null;
+    public Expression(BinaryExpression binExpr) {
+        this.element = null;
+        this.binExpr = binExpr;
+        this.constExpr = null;
+    }
+
+
+    public Expression(ConstantExpression constExpr) {
+        this.element = null;
+        this.binExpr = null;
+        this.constExpr = constExpr;
+    }
+
+    @Override
+    public String toString() {
+        if (element != null) return element.toString();
+        if (binExpr != null) return binExpr.toString();
+        if (constExpr != null) return constExpr.toString();
+        throw new RuntimeException("Expression is not correct: none of three members presented");
+    }
+
+    public static boolean canParse(StringLeftover toParse) {
+        return Literal.canParse(toParse, "element") ||
+                BinaryExpression.canParse(toParse) || ConstantExpression.canParse(toParse);
+    }
+
+    public static ParsePair<Expression> parse(StringLeftover toParse) throws ParseException {
+        if (Literal.canParse(toParse, "element")) {
+            var pair = Literal.parse(toParse, "element");
+            return new ParsePair<>(new Expression(pair.parsed()), pair.leftover());
+        } else if (BinaryExpression.canParse(toParse)) {
+            var pair = BinaryExpression.parse(toParse);
+            return new ParsePair<>(new Expression(pair.parsed()), pair.leftover());
+        } else if (ConstantExpression.canParse(toParse)) {
+            var pair = ConstantExpression.parse(toParse);
+            return new ParsePair<>(new Expression(pair.parsed()), pair.leftover());
+        } else {
+            throw new ParseException("Could not parse expression", toParse.offset());
+        }
     }
 }
