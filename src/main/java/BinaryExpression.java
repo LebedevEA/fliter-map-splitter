@@ -47,7 +47,7 @@ public class BinaryExpression {
 
     public boolean typeCheck(@NotNull Type type) {
         return operation.returnType().equals(type) &&
-                left.typeCheck(operation.argumentType()) && left.typeCheck(operation.argumentType());
+                left.typeCheck(operation.argumentType()) && right.typeCheck(operation.argumentType());
     }
 
     public static boolean canParse(@NotNull StringLeftover toParse) {
