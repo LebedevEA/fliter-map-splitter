@@ -21,7 +21,11 @@ public class ArrayOperationsParser {
     }
 
     public static CallChain parse(String operation) throws ParseException {
-        var aop = new ArrayOperationsParser(operation);
-        return aop.parse();
+        try {
+            var aop = new ArrayOperationsParser(operation);
+            return aop.parse();
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }
